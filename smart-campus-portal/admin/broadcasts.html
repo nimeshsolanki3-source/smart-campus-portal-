@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Broadcasts & Alerts | Admin Console</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- CRITICAL: Inline layout fix — guarantees sidebar+main flex works on file:// protocol -->
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1e293b; }
+        .admin-wrap { display: flex; height: 100vh; overflow: hidden; }
+        .admin-sidebar { width: 256px; min-width: 256px; flex-shrink: 0; display: flex; flex-direction: column; overflow: hidden; background: #0f172a; color: #cbd5e1; border-right: 1px solid #1e293b; }
+        .admin-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+        .admin-topbar { flex-shrink: 0; height: 64px; background: #fff; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+        .admin-scroll { flex: 1; overflow-y: auto; padding: 24px; background: #f1f5f9; }
+        .sidebar-nav { flex: 1; padding: 24px 16px; overflow-y: auto; }
+        .sidebar-nav a { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 600; color: #94a3b8; text-decoration: none; transition: background 0.15s, color 0.15s; }
+        .sidebar-nav a:hover { background: #1e293b; color: #fff; }
+        .sidebar-nav a.active { background: #4f46e5; color: #fff; box-shadow: 0 1px 4px rgba(79,70,229,0.3); }
+    </style>
+</head>
+<body>
+
+    <div class="admin-wrap">
+
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar">
+        <!-- Brand Header -->
+        <div class="h-16 flex items-center px-6 bg-slate-950/80 border-b border-slate-800 gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-indigo-500 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brand-500/30">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div>
+                <div class="font-extrabold text-sm text-white tracking-tight">Smart Campus</div>
+                <div class="text-[10px] font-bold text-brand-400 uppercase tracking-widest flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Admin Console
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar-nav space-y-1">
+            <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Management</div>
+            
+            <a href="dashboard.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                <i class="fas fa-chart-pie w-4 text-center"></i>
+                <span>Dashboard</span>
+            </a>
+            
+            <a href="events.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                <i class="fas fa-calendar-check w-4 text-center"></i>
+                <span>Event Management</span>
+            </a>
+
+            <a href="event-form.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                <i class="fas fa-calendar-plus w-4 text-center"></i>
+                <span>Create New Event</span>
+            </a>
+            
+            <a href="venues.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                <i class="fas fa-building-columns w-4 text-center"></i>
+                <span>Venue & Lab Management</span>
+            </a>
+            
+            <a href="users.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                <i class="fas fa-users-gear w-4 text-center"></i>
+                <span>User Directory</span>
+            </a>
+            
+            <a href="broadcasts.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-brand-600 text-white shadow-sm shadow-brand-500/30">
+                <i class="fas fa-bullhorn w-4 text-center"></i>
+                <span>Campus Broadcasts</span>
+            </a>
+
+            <div class="pt-6 text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Public Shortcuts</div>
+            <a href="../index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                <i class="fas fa-arrow-up-right-from-square w-4 text-center text-brand-400"></i>
+                <span>View Public Portal</span>
+            </a>
+            <a href="../dashboard.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                <i class="fas fa-id-card w-4 text-center text-emerald-400"></i>
+                <span>Student View</span>
+            </a>
+        </nav>
+
+        <!-- User Profile Footer -->
+        <div class="p-4 border-t border-slate-800 bg-slate-950/60">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-700 to-indigo-500 text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                        AD
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="text-xs font-bold text-white truncate">Administrator</div>
+                        <div class="text-[10px] text-slate-400 truncate">admin@smartcampus.edu</div>
+                    </div>
+                </div>
+                <a href="../login.html" class="text-slate-400 hover:text-rose-400 transition p-2 rounded-lg hover:bg-slate-800 text-xs" title="Sign out">
+                    <i class="fas fa-arrow-right-from-bracket"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main View -->
+    <div class="admin-main">
+        <!-- Top Executive Navbar -->
+        <header class="admin-topbar">
+            <div>
+                <h1 class="text-lg font-bold text-slate-900 tracking-tight">Campus Communication & Broadcasts</h1>
+                <span class="text-xs text-slate-400 font-medium">Transmit urgent announcements to all registered students and faculty.</span>
+            </div>
+        </header>
+
+        <!-- Main Viewport -->
+        <main class="admin-scroll space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Compose Form Card -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs h-fit space-y-4">
+                    <div class="flex items-center gap-3 pb-3 border-b border-slate-100">
+                        <div class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-base font-bold">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-sm font-bold text-slate-900">Compose New Broadcast</h2>
+                            <span class="text-[11px] text-slate-400">Push notice across the student body</span>
+                        </div>
+                    </div>
+
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('📢 Broadcast announcement sent to all active students!'); this.reset();">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Recipient Target Audience</label>
+                            <div class="grid grid-cols-3 gap-2 text-xs">
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:bg-brand-50 transition">
+                                    <input type="radio" name="target" checked class="text-brand-600">
+                                    <span class="font-semibold text-slate-700">All Users</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:bg-brand-50 transition">
+                                    <input type="radio" name="target" class="text-brand-600">
+                                    <span class="font-semibold text-slate-700">Students</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:bg-brand-50 transition">
+                                    <input type="radio" name="target" class="text-brand-600">
+                                    <span class="font-semibold text-slate-700">Organizers</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Announcement Title *</label>
+                            <input 
+                                type="text" 
+                                required 
+                                placeholder="e.g., Hackathon 2026 Check-in Timing Update" 
+                                class="w-full px-4 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 font-medium transition"
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Broadcast Message *</label>
+                            <textarea 
+                                rows="4" 
+                                required 
+                                placeholder="Type the announcement message to display on the banner..." 
+                                class="w-full px-4 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 font-medium transition"
+                            ></textarea>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-md shadow-brand-500/20 flex items-center justify-center gap-2"
+                        >
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Transmit Notice Now</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right 2 Cols: Transmission History Archive -->
+                <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
+                    <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-sm font-bold text-slate-900">Broadcast Archive & Logs</h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Records of previously transmitted announcements.</p>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider border-b border-slate-100 font-semibold">
+                                <tr>
+                                    <th class="px-6 py-4">Announcement</th>
+                                    <th class="px-6 py-4">Target Group</th>
+                                    <th class="px-6 py-4">Delivery Status</th>
+                                    <th class="px-6 py-4">Sent Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+                                <tr class="hover:bg-slate-50/80 transition">
+                                    <td class="px-6 py-4">
+                                        <div class="font-bold text-slate-900 text-sm">Spring 2026 Registrations Open</div>
+                                        <p class="text-xs text-slate-500 line-clamp-1 mt-0.5">Seat reservations are now live for all technical workshops and the annual flagship hackathon.</p>
+                                    </td>
+                                    <td class="px-6 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">All Users</span></td>
+                                    <td class="px-6 py-4"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Delivered (520)</span></td>
+                                    <td class="px-6 py-4 text-slate-400 font-mono">Nov 15, 2026 • 10:00 AM</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80 transition">
+                                    <td class="px-6 py-4">
+                                        <div class="font-bold text-slate-900 text-sm">Auditorium Sound System Upgrade Complete</div>
+                                        <p class="text-xs text-slate-500 line-clamp-1 mt-0.5">Grand Central Auditorium is now available for all symposium and tech talk bookings.</p>
+                                    </td>
+                                    <td class="px-6 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-100 text-indigo-700">Organizers</span></td>
+                                    <td class="px-6 py-4"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Delivered (45)</span></td>
+                                    <td class="px-6 py-4 text-slate-400 font-mono">Nov 12, 2026 • 02:30 PM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    </div> <!-- end admin-wrap -->
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
+
